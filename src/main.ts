@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { VersioningType } from '@nestjs/common';
 
+// session
 import * as session from 'express-session';
 
 async function bootstrap() {
@@ -13,7 +14,7 @@ async function bootstrap() {
     session({
       secret: 'cmq-secret-key',
       name: 'c-session',
-      cookie: { maxAge: 10000 }, // 10s
+      cookie: { maxAge: 60000 }, // 10s
       rolling: true,
     }),
   );
