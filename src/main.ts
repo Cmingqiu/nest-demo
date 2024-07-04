@@ -14,7 +14,7 @@ async function bootstrap() {
     session({
       secret: 'cmq-secret-key',
       name: 'c-session',
-      cookie: { maxAge: 60000 }, // 10s
+      cookie: { maxAge: 60000 }, // 60s
       rolling: true,
     }),
   );

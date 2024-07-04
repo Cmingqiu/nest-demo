@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { LoginBody } from './dto/login.dto';
 
+import { JwtService } from '@nestjs/jwt';
+
 import * as svgCaptcha from 'svg-captcha';
 import { Request, Response } from 'express';
 
@@ -10,13 +12,20 @@ export type ReqWidthCookie = Request & {
 
 @Injectable()
 export class LoginService {
-  login(res, params: LoginBody, session) {
+  constructor(private jwtService: JwtService) {}
+  async login(res, params: LoginBody, session) {
     const { username, password, code = '' } = params;
-    console.log(session);
-    if (session.code?.toLowerCase() !== code.toLowerCase()) {
-      return res.status(403).send({ code: -1, msg: 'error' });
+    let response = {};
+    if (!code) {
+      response = { code: -1001, msg: '验证码过期', data: null };
+    } else if (session.code?.toLowerCase() !== code.toLowerCase()) {
+      response = { code: -1001, msg: '验证码错误', data: null };
     }
-    return res.send({ code: 0, msg: username + ' | ' + password });
+
+    const payload = { sub: 'userId', username: username };
+    const token = await this.jwtService.signAsync(payload);
+    response = { code: 0, data: token };
+    return res.send(response);
   }
 
   generateCaptcha(req: ReqWidthCookie, res: Response) {

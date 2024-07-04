@@ -23,6 +23,7 @@
 
 - session认证 `express-session`
 - 验证码生成 <kbd>svg-captcha</kbd>
+- JWT鉴权
 
 <style>
 kbd {
