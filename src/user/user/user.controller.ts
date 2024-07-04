@@ -7,15 +7,20 @@ import {
   Param,
   Delete,
   Version,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
-@Controller({
+/* @Controller({
   path: 'user',
   version: '1',
-})
+}) */
+@Controller('user')
+// @UseGuards(AuthGuard)  局部守卫
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -26,6 +31,7 @@ export class UserController {
   }
 
   @Get()
+  @Roles(['admin'])
   findAll() {
     return this.userService.findAll();
   }
