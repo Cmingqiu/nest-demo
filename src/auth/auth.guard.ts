@@ -7,6 +7,7 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 import { Roles } from './roles.decorator';
 
@@ -17,23 +18,26 @@ export class AuthGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
+
   async canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
     const token = this.extractTokenFromRequest(req);
     const whiteRoute = this.isWhiteRoute(req.url);
+    // 白名单路由跳过校验
     if (whiteRoute) return true;
-    // 未携带token
+    // 未携带token返回401
     if (!token) throw new UnauthorizedException();
-
-    const a = await this.validateToken(token);
-    console.log('a: ', a);
+    // 解析jwt对于的参数值
+    const tokenPayload = await this.validateToken(token);
+    // 拿到角色
     const roles = this.reflector.get(Roles, context.getHandler());
-    if (!roles) return true;
+    if (!roles) return true; // matchRoles(roles,req);
 
-    console.log(roles, req.url);
     return !!req;
   }
+  0;
   // 提取token
   extractTokenFromRequest(req: Request) {
     return req.headers['access-token'];
@@ -42,7 +46,7 @@ export class AuthGuard implements CanActivate {
   async validateToken(token) {
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: 'secretKey',
+        secret: this.configService.get('TOKEN_SECRET'),
       });
       return payload;
     } catch (error) {

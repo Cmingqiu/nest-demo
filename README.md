@@ -22,9 +22,11 @@
 ## 特性
 
 - session认证 `express-session`
-- 验证码生成 <kbd>svg-captcha</kbd>
-- JWT鉴权
+- 验证码生成 `svg-captcha`
+- JWT鉴权 `@nestjs/jwt`
+- 配置文件 `@nestjs/config`
 
+```css
 <style>
 kbd {
   margin: 0px 0.2em;
@@ -41,3 +43,6 @@ kbd {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }</style>
+```
+
+- 第三方模块通过app.module.ts注入

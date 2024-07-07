@@ -7,6 +7,7 @@ import * as session from 'express-session';
 
 import { AuthGuard } from './auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -24,7 +25,9 @@ async function bootstrap() {
     }),
   );
   // 全局鉴权守卫
-  app.useGlobalGuards(new AuthGuard(new Reflector(), new JwtService()));
+  app.useGlobalGuards(
+    new AuthGuard(new Reflector(), new JwtService(), new ConfigService()),
+  );
   await app.listen(3000);
 }
 bootstrap();

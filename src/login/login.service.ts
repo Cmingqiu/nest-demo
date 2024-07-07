@@ -13,18 +13,18 @@ export type ReqWidthCookie = Request & {
 @Injectable()
 export class LoginService {
   constructor(private jwtService: JwtService) {}
-  async login(res, params: LoginBody, session) {
-    const { username, password, code = '' } = params;
+  async login(res, body: LoginBody, session) {
+    const { username, password, code = '' } = body;
     let response = {};
     if (!code) {
       response = { code: -1001, msg: '验证码过期', data: null };
     } else if (session.code?.toLowerCase() !== code.toLowerCase()) {
       response = { code: -1001, msg: '验证码错误', data: null };
+    } else {
+      const payload = { sub: 'userId', username: username };
+      const token = await this.jwtService.signAsync(payload);
+      response = { code: 0, data: token };
     }
-
-    const payload = { sub: 'userId', username: username };
-    const token = await this.jwtService.signAsync(payload);
-    response = { code: 0, data: token };
     return res.send(response);
   }
 
