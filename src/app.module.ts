@@ -11,11 +11,12 @@ import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 
+const NODE_ENV = process.env.NODE_ENV;
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // 设为全局模块
-      envFilePath: ['.env.production', '.env.development'],
+      envFilePath: `.env.${NODE_ENV}`,
     }),
     JwtModule.registerAsync({
       global: true,

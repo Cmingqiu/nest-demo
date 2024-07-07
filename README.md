@@ -24,7 +24,7 @@
 - session认证 `express-session`
 - 验证码生成 `svg-captcha`
 - JWT鉴权 `@nestjs/jwt`
-- 配置文件 `@nestjs/config`
+- 配置文件 `@nestjs/config` + cross-env
 
 ```css
 <style>
