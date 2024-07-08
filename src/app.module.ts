@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD, Reflector } from '@nestjs/core';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -9,7 +8,6 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user/user.module';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
-import { AuthGuard } from './auth/auth.guard';
 
 const NODE_ENV = process.env.NODE_ENV;
 @Module({
@@ -25,7 +23,7 @@ const NODE_ENV = process.env.NODE_ENV;
         return {
           secret: configService.get('TOKEN_SECRET'),
           signOptions: {
-            expiresIn: '60s',
+            expiresIn: '1h',
           },
         };
       },
@@ -38,6 +36,8 @@ const NODE_ENV = process.env.NODE_ENV;
   providers: [
     AppService,
     /* 全局鉴权守卫
+    import { AuthGuard } from './auth/auth.guard';
+    import { APP_GUARD, Reflector } from '@nestjs/core';
      {
       provide: APP_GUARD,
       useValue: new AuthGuard(new Reflector()),
