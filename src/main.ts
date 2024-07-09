@@ -10,7 +10,9 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['log', 'debug', 'error', 'warn'],
+  });
   // 开启版本控制，类型为url
   app.enableVersioning({
     type: VersioningType.URI,
