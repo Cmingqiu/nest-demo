@@ -9,7 +9,7 @@ import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-import { Roles } from './roles.decorator';
+import { Roles } from '@/auth/roles.decorator';
 
 //  白名单
 const whiteRoutes = ['login'];

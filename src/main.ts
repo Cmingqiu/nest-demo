@@ -5,7 +5,7 @@ import { VersioningType } from '@nestjs/common';
 // session
 import * as session from 'express-session';
 
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from '@/utils/guards/auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 

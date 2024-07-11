@@ -5,9 +5,9 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user/user.module';
-import { LoginModule } from './login/login.module';
-import { AuthModule } from './auth/auth.module';
+import { UserModule } from '@/user/user/user.module';
+import { LoginModule } from '@/login/login.module';
+import { AuthModule } from '@/auth/auth.module';
 
 const NODE_ENV = process.env.NODE_ENV;
 @Module({
@@ -36,7 +36,7 @@ const NODE_ENV = process.env.NODE_ENV;
   providers: [
     AppService,
     /* 全局鉴权守卫
-    import { AuthGuard } from './auth/auth.guard';
+    import { AuthGuard } from '@/utils/guards/auth.guard';
     import { APP_GUARD, Reflector } from '@nestjs/core';
      {
       provide: APP_GUARD,
