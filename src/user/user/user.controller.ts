@@ -9,10 +9,12 @@ import {
   Version,
   UseGuards,
 } from '@nestjs/common';
+
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Roles } from 'src/auth/roles.decorator';
+import { NoAuth } from '@/common/decorators/NoAuth';
 
 /* @Controller({
   path: 'user',
@@ -35,6 +37,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @NoAuth()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

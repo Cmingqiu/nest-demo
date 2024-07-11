@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
 import { Roles } from '@/auth/roles.decorator';
+import { NO_AUTH } from '@/common/decorators/NoAuth';
 
 //  白名单
 const whiteRoutes = ['login'];
@@ -25,11 +26,17 @@ export class AuthGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const token = this.extractTokenFromRequest(req);
     const whiteRoute = this.isWhiteRoute(req.url);
-    // 白名单路由跳过校验
-    if (whiteRoute) return true;
+
+    const noAuth = this.reflector.getAllAndOverride<boolean>(NO_AUTH, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    // 白名单路由 或者 指定不校验的controller 跳过校验
+    if (whiteRoute || noAuth) return true;
     // 未携带token返回401
     if (!token) throw new UnauthorizedException();
-    // 解析jwt对于的参数值
+    // 解析jwt对应的参数值
     const tokenPayload = await this.validateToken(token);
     // 拿到角色
     const roles = this.reflector.get(Roles, context.getHandler());
