@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,10 +13,12 @@ import { AuthModule } from '@/auth/auth.module';
 const NODE_ENV = process.env.NODE_ENV;
 @Module({
   imports: [
+    // 配置注册
     ConfigModule.forRoot({
       isGlobal: true, // 设为全局模块
       envFilePath: `.env.${NODE_ENV}`,
     }),
+    // jwt注册
     JwtModule.registerAsync({
       global: true,
       inject: [ConfigService],
@@ -28,6 +31,8 @@ const NODE_ENV = process.env.NODE_ENV;
         };
       },
     }),
+    // 数据库 nest-demo 连接
+    MongooseModule.forRoot('mongodb://localhost:27017/nest-demo'),
     UserModule,
     LoginModule,
     AuthModule,

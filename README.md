@@ -25,6 +25,11 @@
 - 验证码生成 `svg-captcha`
 - JWT鉴权 `@nestjs/jwt`
 - 配置文件 `@nestjs/config` + cross-env
+- mongodb `@nestjs/mongoose`、 `mongoose`
+
+---
+
+- 第三方模块通过app.module.ts注入
 
 ```css
 <style>
@@ -44,5 +49,3 @@ kbd {
   -webkit-border-radius: 3px;
 }</style>
 ```
-
-- 第三方模块通过app.module.ts注入
