@@ -24,14 +24,14 @@ export class UserService {
     return { code: 0, data: user };
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     try {
       const data = await this.userModel.findByIdAndUpdate(id, updateUserDto);
       return { code: 0, data };
     } catch (error) {}
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const data = await this.userModel.findByIdAndDelete(id);
       return { code: 0, data };
