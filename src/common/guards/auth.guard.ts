@@ -9,7 +9,7 @@ import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-import { Roles } from '@/auth/roles.decorator';
+import { Roles } from '@/common/decorators/roles.decorator';
 import { NO_AUTH } from '@/common/decorators/NoAuth';
 
 //  白名单
@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
 
     return !!req;
   }
-  0;
+
   // 提取token
   extractTokenFromRequest(req: Request) {
     return req.headers['access-token'];

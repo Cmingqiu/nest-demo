@@ -23,7 +23,7 @@
 
 - session认证 `express-session`
 - 验证码生成 `svg-captcha`
-- JWT鉴权 `@nestjs/jwt`
+- JWT鉴权 `@nestjs/jwt` 、 token刷新
 - 配置文件 `@nestjs/config` + cross-env
 - mongodb `@nestjs/mongoose`、 `mongoose`
 

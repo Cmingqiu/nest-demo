@@ -8,7 +8,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from '@/user/user.module';
 import { LoginModule } from '@/login/login.module';
-import { AuthModule } from '@/auth/auth.module';
 
 const NODE_ENV = process.env.NODE_ENV;
 @Module({
@@ -35,13 +34,12 @@ const NODE_ENV = process.env.NODE_ENV;
     MongooseModule.forRoot('mongodb://localhost:27017/nest-demo'),
     UserModule,
     LoginModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     /* 全局鉴权守卫
-    import { AuthGuard } from '@/utils/guards/auth.guard';
+    import { AuthGuard } from '@/common/guards/auth.guard';
     import { APP_GUARD, Reflector } from '@nestjs/core';
      {
       provide: APP_GUARD,
