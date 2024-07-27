@@ -38,7 +38,6 @@ export class AuthGuard implements CanActivate {
     if (!token) throw new UnauthorizedException();
     // 解析jwt对应的参数值
     const tokenPayload = await this.validateToken(token);
-    console.log('tokenPayload: ', tokenPayload);
     // 拿到角色
     const roles = this.reflector.get(Roles, context.getHandler());
     if (!roles) return true; // matchRoles(roles,req);
