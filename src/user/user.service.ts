@@ -14,8 +14,8 @@ export class UserService {
     return { code: 0, data };
   }
 
-  async findAll() {
-    const allUsers = await this.userModel.find();
+  async findAll(params: UpdateUserDto) {
+    const allUsers = await this.userModel.find(params);
     return { code: 0, data: allUsers };
   }
 

@@ -9,6 +9,7 @@ import {
   Version,
   UseGuards,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -34,14 +35,13 @@ export class UserController {
 
   @Get()
   @Roles(['admin'])
-  findAll() {
-    return this.userService.findAll();
+  findAll(@Query() queryParams: UpdateUserDto) {
+    return this.userService.findAll(queryParams);
   }
 
   @NoAuth()
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    console.log('id:', id);
     return this.userService.findOne(id);
   }
 

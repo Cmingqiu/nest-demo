@@ -23,7 +23,11 @@ async function bootstrap() {
     origin.push(/^https?:\/\/localhost:*/);
   }
   // 开启CORS
-  app.enableCors({ origin, credentials: true });
+  app.enableCors({
+    origin,
+    credentials: true, // 允许携带凭证信息
+    // methods: 'GET,POST', // 只允许GET和POST请求
+  });
 
   // 开启版本控制，类型为url
   app.enableVersioning({
