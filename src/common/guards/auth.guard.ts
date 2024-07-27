@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
 import { Roles } from '@/common/decorators/roles.decorator';
-import { NO_AUTH } from '@/common/decorators/NoAuth';
+import { NO_AUTH } from '@/common/decorators/noAuth.decorator';
 
 //  白名单
 const whiteRoutes = ['login'];

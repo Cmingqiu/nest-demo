@@ -8,6 +8,7 @@ import {
   Delete,
   Version,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -39,8 +40,9 @@ export class UserController {
 
   @NoAuth()
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    console.log('id:', id);
+    return this.userService.findOne(id);
   }
 
   @Post(':id')

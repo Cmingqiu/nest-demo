@@ -24,6 +24,8 @@ async function bootstrap() {
       name: 'c-session',
       cookie: { maxAge: 60000 }, // 60s
       rolling: true,
+      resave: false,
+      saveUninitialized: true,
     }),
   );
   // 全局鉴权守卫
