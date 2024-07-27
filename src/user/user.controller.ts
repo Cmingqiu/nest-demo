@@ -14,7 +14,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Roles } from '@/common/decorators/roles.decorator';
-import { NoAuth } from '@/common/decorators/NoAuth';
+import { NoAuth } from '@/common/decorators/noAuth.decorator';
 
 /* @Controller({
   path: 'user',
