@@ -1,5 +1,5 @@
 import { NestFactory, Reflector } from '@nestjs/core';
-import { VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 
 // session
 import * as session from 'express-session';
@@ -48,6 +48,8 @@ async function bootstrap() {
   app.useGlobalGuards(
     new AuthGuard(new Reflector(), new JwtService(), new ConfigService()),
   );
+  // 开启全局验证管道
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
 bootstrap();

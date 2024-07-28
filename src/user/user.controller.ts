@@ -15,6 +15,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { SearchUserDto } from './dto/search-user.dto';
 import { Roles } from '@/common/decorators/roles.decorator';
 import { NoAuth } from '@/common/decorators/noAuth.decorator';
 
@@ -35,7 +36,7 @@ export class UserController {
 
   @Get()
   @Roles(['admin'])
-  findAll(@Query() queryParams: UpdateUserDto) {
+  findAll(@Query() queryParams: SearchUserDto) {
     return this.userService.findAll(queryParams);
   }
 

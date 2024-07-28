@@ -26,6 +26,7 @@
 - JWT鉴权 `@nestjs/jwt` 、 token刷新
 - 配置文件 `@nestjs/config` + cross-env
 - mongodb `@nestjs/mongoose`、 `mongoose`
+- 参数验证管道ValidationPipe `class-validator`、`class-transformer`
 
 ---
 
