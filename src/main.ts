@@ -9,6 +9,7 @@ import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { AuthGuard } from '@/common/guards/auth.guard';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { ResponseFormatInterceptor } from './common/interceptors/responseFormat';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -44,6 +45,8 @@ async function bootstrap() {
       saveUninitialized: true,
     }),
   );
+  // 全局拦截器
+  app.useGlobalInterceptors(new ResponseFormatInterceptor());
   // 全局鉴权守卫
   app.useGlobalGuards(
     new AuthGuard(new Reflector(), new JwtService(), new ConfigService()),

@@ -21,12 +21,14 @@
 
 ## 特性
 
-- session认证 `express-session`
-- 验证码生成 `svg-captcha`
-- JWT鉴权 `@nestjs/jwt` 、 token刷新
-- 配置文件 `@nestjs/config` + cross-env
-- mongodb `@nestjs/mongoose`、 `mongoose`
-- 参数验证管道ValidationPipe `class-validator`、`class-transformer`
+- [x] session认证 `express-session`
+- [x] 验证码生成 `svg-captcha`
+- [x] JWT鉴权 `@nestjs/jwt` 、 token刷新
+- [x] 配置文件 `@nestjs/config` + cross-env
+- [x] mongodb `@nestjs/mongoose`、 `mongoose`
+- [x] 参数验证管道ValidationPipe `class-validator`、`class-transformer`
+- [ ] 格式化接口响应的数据结构
+- [ ] 全局异常过滤器
 
 ---
 
